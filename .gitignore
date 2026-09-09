@@ -1,0 +1,6 @@
+.DS_Store
+.build/
+dist/
+DefaultWebbrower.png
+xcuserdata/
+DerivedData/
