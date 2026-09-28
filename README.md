@@ -8,6 +8,7 @@ A native macOS URL router for people who keep separate projects in separate brow
 - Prompts for the destination browser, or forwards directly to the saved **active browser**.
 - Finds Safari, Chrome (and Canary), Brave, DuckDuckGo, Firefox, Arc, Edge, Vivaldi, and Orion.
 - Registers `Command-Shift-B` globally to change the active browser without leaving your current app.
+- Runs as a single Launch Services instance, so subsequent link opens are routed to the existing Browser Relay process.
 
 ## Run it
 
@@ -36,6 +37,16 @@ Build a shareable ZIP from a Mac with Xcode installed:
 This creates `dist/BrowserRelay-1.0.0-macOS.zip` and prints its SHA-256 checksum. The recipient unzips it, moves `BrowserRelay.app` to `/Applications`, opens it once, and uses the app’s **Make Browser Relay My Default** button.
 
 The generated ZIP is **ad-hoc signed**, which is appropriate for trusted personal/internal sharing. On another Mac, Gatekeeper may require the recipient to Control-click the app and choose **Open** the first time. For public distribution without that warning, enroll in the Apple Developer Program and sign with a Developer ID certificate and notarize the release.
+
+## Rebuild and redeploy locally
+
+To replace the installed `/Applications/BrowserRelay.app` with a fresh Release build, run:
+
+```zsh
+./scripts/redeploy-browser-relay.sh
+```
+
+The script requests administrator access only to update `/Applications`, keeps the replaced app in a temporary backup directory, and launches the new installed copy. Use `--no-launch` when you only want to install it.
 
 ## GitHub releases
 
